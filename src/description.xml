@@ -1,21 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<description
-        xmlns="http://openoffice.org/extensions/description/2006"
-        xmlns:d="http://openoffice.org/extensions/description/2006"
-        xmlns:l="http://libreoffice.org/extensions/description/2011"
-        xmlns:xlink="http://www.w3.org/1999/xlink">
-    <dependencies>
-        <l:LibreOffice-minimal-version value="5.0" d:name="LibreOffice 5.0"/>
-    </dependencies>
-    <identifier value="com.iex.api.localc"/>
-    <version value="0.0.7"/>
-    <display-name>
-        <name lang="en">IEX Trading Data Extension</name>
-    </display-name>
-    <publisher>
-        <name xlink:href="https://github.com/dhocker/iex-localc" lang="en">Qalydon</name>
-	</publisher>
-	<extension-description>
-		<src xlink:href="description-en-US.txt" lang="en"/>
-	</extension-description>
-</description>
+<ns0:description xmlns:ns0="http://openoffice.org/extensions/description/2006" xmlns:ns1="http://libreoffice.org/extensions/description/2011" xmlns:ns2="http://www.w3.org/1999/xlink">
+    <ns0:dependencies>
+        <ns1:LibreOffice-minimal-version value="5.0" ns0:name="LibreOffice 5.0" />
+    </ns0:dependencies>
+    <ns0:identifier value="com.iex.api.localc" />
+    <ns0:version value="0.0.9" />
+    <ns0:display-name>
+        <ns0:name lang="en">IEX Trading Data Extension</ns0:name>
+    </ns0:display-name>
+    <ns0:publisher>
+        <ns0:name lang="en" ns2:href="https://github.com/dhocker/iex-localc">Qalydon</ns0:name>
+	</ns0:publisher>
+	<ns0:extension-description>
+		<ns0:src lang="en" ns2:href="description-en-US.txt" />
+	</ns0:extension-description>
+</ns0:description>

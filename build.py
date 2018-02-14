@@ -20,6 +20,13 @@
 # http://www.biochemfusion.com/doc/Calc_addin_howto.html
 # https://github.com/madsailor/SMF-Extension
 #
+# How to run a build:
+#
+# python3 build.py [next]
+#
+# where:
+#   next option causes the build number to be incremented. This updates the src/description.xml file.
+#
 
 import os
 import sys
@@ -32,19 +39,38 @@ import xml.etree.ElementTree as etree
 if sys.platform == 'darwin':
     # macOS
     os.environ["PATH"] = os.environ["PATH"] + ":/usr/lib/ure/bin/"
-    os.environ["PATH"] = os.environ["PATH"] + ":/Users/dhocker/LibreOffice5.3_SDK/bin"
+    os.environ["PATH"] = os.environ["PATH"] + ":/Users/dhocker/LibreOffice5.4_SDK/bin"
     os.environ["DYLD_LIBRARY_PATH"] = os.environ["OO_SDK_URE_LIB_DIR"]
 else:
+    # TODO figure out how to build on other OSes
     print ("Platform {0} is not supported by this build script".format(sys.platform))
     exit(1)
 #subprocess.call("env")
 #print (os.environ["DYLD_LIBRARY_PATH"])
 
+# Recognized command line args
+incr_version = len(sys.argv) == 2 and sys.argv[1].lower() == "next"
+
 # Extract version from description.xml
 tree = etree.parse("src/description.xml")
 root = tree.getroot()
+# There should only be one version node
 nodes = root.findall('{http://openoffice.org/extensions/description/2006}version')
 build_version = nodes[0].attrib["value"]
+
+# Update build number as required
+if incr_version:
+    parts = build_version.split(".")
+    build_num = parts[len(parts) - 1]
+    build_num = str(int(build_num) + 1)
+    parts[len(parts) - 1] = build_num
+    build_version = str.join(".", parts)
+    nodes[0].attrib["value"] = build_version
+    # Note that this will rewrite the entire file and the results will likely
+    # look substantially different.
+    tree.write("src/description.xml", xml_declaration=False, encoding="utf-8",)
+    print("Build number incremented")
+
 print ("=============================")
 print ("Building Version:", build_version)
 print ("=============================")
@@ -104,5 +130,5 @@ shutil.move("build/iex.zip", "iex.oxt")
 print ("Extension file iex.oxt created")
 
 print ("============================================")
-print ("Build complete for version:", build_version)
+print ("Build complete for Version:", build_version)
 print ("============================================")
