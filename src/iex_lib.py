@@ -101,6 +101,9 @@ class QConfiguration:
         # If no iex.conf file exists, create one with all defaults
         if not cls.iex_conf_exists:
             QConfiguration.save()
+            # The logger defaults to debug level logging.
+            # This sets the log level to whatever default was set above.
+            the_app_logger.set_log_level(cls.loglevel)
 
     @classmethod
     def save(cls):
