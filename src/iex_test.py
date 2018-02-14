@@ -19,6 +19,7 @@
 
 from iex_app_logger import AppLogger
 from iex_price import get_price
+from iex_quote import get_quote
 # import datetime
 # import time
 # import json
@@ -27,7 +28,23 @@ from iex_price import get_price
 the_app_logger = AppLogger("iex-extension")
 logger = the_app_logger.getAppLogger()
 
-print("Price")
-logger.info("Testing iex_price.get_price()")
-j = get_price("aapl")
-print ("Price for aapl:", j)
+# print("Price")
+# logger.info("Testing iex_price.get_price()")
+# j = get_price("aapl")
+# print ("Price for aapl:", j)
+
+print("Quote")
+logger.info("Testing iex_quote.get_quote()")
+# v = get_quote("ibm", "latestPrice")
+# print ("latestPrice for IBM:", v)
+# v = get_quote("ibm", "change")
+# print ("change for IBM:", v)
+# v = get_quote("mmm", "latestPrice")
+# print ("latestPrice for MMM:", v)
+# v = get_quote("mmm", "change")
+# print ("change for MMM:", v)
+
+from iex_quote import quote_keys
+for key in iter(quote_keys):
+    v = get_quote("mmm", key)
+    print (key, ":", v)
