@@ -1,0 +1,7 @@
+The IEX Trading Data Extension enables you to create LibreOffice Calc spreadsheets with stock market data pulled from the IEX service.
+
+More information can be found at http://github.com/qalydon/iex-localc.
+
+By using this add-in you agree the the IEX terms of service: https://iextrading.com/api-exhibit-a/
+
+Data provided for free by IEX.

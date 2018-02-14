@@ -1,0 +1,8 @@
+<manifest:manifest>
+    <manifest:file-entry manifest:media-type="application/vnd.sun.star.uno-typelibrary;type=RDB"
+                         manifest:full-path="xiex.rdb"/>
+    <manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-data"
+                         manifest:full-path="iex.xcu"/>
+    <manifest:file-entry manifest:media-type="application/vnd.sun.star.uno-component;type=Python"
+                         manifest:full-path="iex_impl.py"/>
+</manifest:manifest> 

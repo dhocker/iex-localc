@@ -1,0 +1,16 @@
+// com.iex.api.localc
+// Naming convention: https://wiki.openoffice.org/wiki/Documentation/DevGuide/AppendixA/General_Design_Rules
+
+module com {
+    module iex {
+        module api {
+            module localc {
+                interface XIex
+                {
+                  // Identifier (e.g. ticker symbol), item (e.g. tag or series id)
+                  any IexPrice( [in] string symbol );
+                };
+            };
+        };
+    };
+};
