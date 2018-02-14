@@ -1,6 +1,6 @@
 #
 # iex_lib - Reusable classes and functions for accessing IEX
-# Copyright (C) 2017  Dave Hocker (email: AtHomeX10@gmail.com)
+# Copyright (C) 2018  Dave Hocker (email: Qalydon17@gmail.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ class QConfiguration:
     file_path = ""
     full_file_path = ""
     cacerts = ""
-    loglevel = ""
+    loglevel = "info"
     cwd = ""
     iex_conf_exists = False
 

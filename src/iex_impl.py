@@ -37,7 +37,7 @@ try:
 
     # Local imports go here
     from iex_app_logger import AppLogger
-    from iex_lib import IEXStocks
+    from iex_price import get_price
     # from iex_lib import QConfiguration
     # from intrinio_access import intrinio_login, is_valid_identifier, get_data_point, \
     #     get_historical_prices, get_historical_data, get_news, get_fundamentals_data, get_tags, \
@@ -84,10 +84,7 @@ class IexImpl(unohelper.Base, XIex ):
 
     def IexPrice(self, symbol):
         logger.debug("IexPrice called")
-        res = IEXStocks.get_price(symbol)
-        if res["status_code"] == 200:
-            return float(res["result"])
-        return res["error_message"]
+        return get_price(symbol)
 
 
 # Configuration lock. Used to deal with the fact that sometimes
