@@ -98,6 +98,10 @@ class QConfiguration:
         # Attach the certs file to the URL processor
         setup_cacerts(cls.cacerts)
 
+        # If no iex.conf file exists, create one with all defaults
+        if not cls.iex_conf_exists:
+            QConfiguration.save()
+
     @classmethod
     def save(cls):
         """
@@ -124,6 +128,8 @@ class QConfiguration:
             os.chmod(cls.full_file_path, stat.S_IRUSR | stat.S_IWUSR)
         else:
             pass
+
+        cls.iex_conf_exists = True
 
     @classmethod
     def is_configured(cls):
