@@ -19,7 +19,7 @@
 
 from iex_app_logger import AppLogger
 from iex_price import get_price
-from iex_quote import get_quote
+from iex_quote import get_quote_item, get_quote_key_count, get_quote_keyx
 # import datetime
 # import time
 # import json
@@ -44,7 +44,16 @@ logger.info("Testing iex_quote.get_quote()")
 # v = get_quote("mmm", "change")
 # print ("change for MMM:", v)
 
-from iex_quote import quote_keys
-for key in iter(quote_keys):
-    v = get_quote("mmm", key)
+quote_key_count = get_quote_key_count()
+print("Quote key count:", quote_key_count)
+print("Quote Key/Value pair test")
+for x in range(0, quote_key_count):
+    key = get_quote_keyx(x)
+    v = get_quote_item("mmm", key)
     print (key, ":", v)
+print("Key index out of range test")
+key = get_quote_keyx(quote_key_count + 1)
+print(key)
+print("Invalid key test")
+v = get_quote_item("mmm", "invalid_key")
+print(v)

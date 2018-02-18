@@ -15,6 +15,7 @@
 # along with this program (the LICENSE.md file).  If not, see <http://www.gnu.org/licenses/>.
 #
 
+from xml.sax.saxutils import escape
 
 class XCUFile:
     """
@@ -42,7 +43,7 @@ class XCUFile:
     def _generate_function(self, xcufile, name, desc, parms):
         xcufile.write('  <node oor:name="' + name + '" oor:op="replace">\n')
         xcufile.write('    <prop oor:name="DisplayName"><value xml:lang="en">' + name + '</value></prop>\n')
-        xcufile.write('    <prop oor:name="Description"><value xml:lang="en">' + desc + '</value></prop>\n')
+        xcufile.write('    <prop oor:name="Description"><value xml:lang="en">' + escape(desc) + '</value></prop>\n')
         xcufile.write('    <prop oor:name="Category"><value>Add-In</value></prop>\n')
         xcufile.write(
             '    <prop oor:name="CompatibilityName"><value xml:lang="en">AutoAddIn.' + self.auto_add_in + '.' + name + '</value></prop>\n')
@@ -53,7 +54,7 @@ class XCUFile:
             p_name = p.strip("[]")
             xcufile.write('      <node oor:name="' + p_name + '" oor:op="replace">\n')
             xcufile.write('        <prop oor:name="DisplayName"><value xml:lang="en">' + p_name + '</value></prop>\n')
-            xcufile.write('        <prop oor:name="Description"><value xml:lang="en">' + desc + '</value></prop>\n')
+            xcufile.write('        <prop oor:name="Description"><value xml:lang="en">' + escape(desc) + '</value></prop>\n')
             xcufile.write('      </node>\n')
 
         xcufile.write('    </node>\n')

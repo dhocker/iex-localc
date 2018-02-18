@@ -100,9 +100,9 @@ shutil.copy("src/description.xml", "build/")
 shutil.copy("src/iex_impl.py", "build/")
 shutil.copy("src/iex_app_logger.py", "build/")
 shutil.copy("src/iex_lib.py", "build/")
+shutil.copy("src/iex_base.py", "build/")
 shutil.copy("src/iex_price.py", "build/")
 shutil.copy("src/iex_quote.py", "build/")
-shutil.copy("src/iex_cache.py", "build/")
 shutil.copy("src/extn_helper.py", "build/")
 shutil.copy("src/url_helpers.py", "build/")
 shutil.copy("certifi/cacert.pem", "build/")
@@ -112,10 +112,25 @@ print ("Generating iex.xcu")
 xcu = XCUFile("com.iex.api.localc.python.IexImpl", "XIex")
 #
 # Note: DO NOT use underscores in parameter names. LO does not accept them.
+# Note: Be careful using any special characters in descriptions and comments.
+# This stuff ends up in an XML file and hence has all of the same restrictions.
+# The xcu_file class escapes all descriptions in an attemp to avoid problems.
 #
 xcu.add_function("IexPrice", "Get stock price",
                  [
                      ('symbol', 'The stock ticker symbol.')
+                 ])
+xcu.add_function("IexQuoteKeyCount", "Get count of keys in a quote",
+                 [
+                 ])
+xcu.add_function("IexQuoteKeyByIndex", "Get a quote key by its index",
+                 [
+                     ('keyindex', 'The key index where index < key count')
+                 ])
+xcu.add_function("IexQuoteItem", "Get a quote item by its key",
+                 [
+                     ('symbol', 'The stock ticker symbol for the quote'),
+                     ('itemkey', 'The item key')
                  ])
 
 xcu.generate("build/iex.xcu")

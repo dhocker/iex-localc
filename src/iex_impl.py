@@ -37,25 +37,6 @@ try:
 
     # Local imports go here
     from iex_app_logger import AppLogger
-    from iex_price import get_price
-    # from iex_lib import QConfiguration
-    # from intrinio_access import intrinio_login, is_valid_identifier, get_data_point, \
-    #     get_historical_prices, get_historical_data, get_news, get_fundamentals_data, get_tags, \
-    #     get_financials_data, get_reported_fundamentals_data, get_reported_tags, get_reported_financials_data, \
-    #     get_usage
-    # from iex_cache import UsageDataCache
-    # from intrinio_indices import get_indices_by_query_count, get_indices_by_query, get_indices_by_query_tag_count, \
-    #     get_indices_by_query_tag, get_index_by_identifier_tag_count, get_index_by_identifier_tag, \
-    #     get_index_by_identifier
-    # from intrinio_companies import get_companies_by_query, get_companies_by_query_count, get_companies_by_query_tag_count, \
-    #     get_companies_by_query_tag, get_company_by_identifier, get_company_by_identifier_tag_count, \
-    #     get_company_by_identifier_tag
-    # from intrinio_securities import get_securities_by_query, get_securities_by_query_count, \
-    #     get_securities_by_query_tag_count, get_securities_by_query_tag, get_security_by_identifier, \
-    #     get_security_identifier_tag_count, get_security_identifier_tag
-    # from intrinio_company_sec_filings import get_company_sec_filings, get_company_sec_filings_count, \
-    #     get_company_sec_filings_tag_count, get_company_sec_filings_tag
-    # from extn_helper import date_str_to_float
     import xml.etree.ElementTree as etree
 
     # Logger init
@@ -65,17 +46,20 @@ try:
     tree = etree.parse(cmd_folder + "/description.xml")
     root = tree.getroot()
     nodes = root.findall('{http://openoffice.org/extensions/description/2006}version')
-    logger.info("Iex-LOCalc Version: %s", nodes[0].attrib["value"])
+    logger.info("IEX-LOCalc Version: %s", nodes[0].attrib["value"])
+    # After logger
+    from iex_price import get_price
+    from iex_quote import get_quote_key_count, get_quote_keyx, get_quote_item
 except Exception as ex:
     # Emergency debugging to cover for the fact that LibreOffice is terrible at debugging...
-    fh = open("/Volumes/Z77ExtremeDataSSD/dhocker/libreoffice/iex/error_report.txt", "w")
+    fh = open("/Volumes/Z77ExtremeDataSSD/dhocker/libreoffice/iex/error_report.txt", "a")
     fh.write(ex)
     fh.write(str(ex))
     fh.close()
     exit(666)
 
 class IexImpl(unohelper.Base, XIex ):
-    """Define the main class for the Intrinio LO Calc extension """
+    """Define the main class for the IEX LO Calc extension """
     def __init__( self, ctx ):
         self.ctx = ctx
         logger.debug("IexImpl initialized")
@@ -83,8 +67,20 @@ class IexImpl(unohelper.Base, XIex ):
         logger.debug("ctx: %s", str(ctx))
 
     def IexPrice(self, symbol):
-        logger.debug("IexPrice called")
+        logger.debug("IexPrice called %s", symbol)
         return get_price(symbol)
+
+    def IexQuoteKeyCount(self):
+        logger.debug("IexQuoteKeyCount called")
+        return get_quote_key_count()
+
+    def IexQuoteKeyByIndex(self, index):
+        logger.debug("IexQuoteKeyByIndex called %d", index)
+        return get_quote_keyx(index)
+
+    def IexQuoteItem(self, symbol, key):
+        logger.debug("IexQuoteItem called %s %s", symbol, key)
+        return get_quote_item(symbol, key)
 
 
 # Configuration lock. Used to deal with the fact that sometimes

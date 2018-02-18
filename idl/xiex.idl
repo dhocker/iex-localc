@@ -9,6 +9,12 @@ module com {
                 {
                   // Identifier (e.g. ticker symbol), item (e.g. tag or series id)
                   any IexPrice( [in] string symbol );
+                  // Returns count of keys in a quote
+                  any IexQuoteKeyCount();
+                  // Returns a key by index
+                  any IexQuoteKeyByIndex( [in] long keyindex );
+                  // Returns a key by index
+                  any IexQuoteItem( [in] string symbol, [in] string itemkey );
                 };
             };
         };
