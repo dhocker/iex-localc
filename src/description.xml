@@ -3,7 +3,7 @@
         <ns1:LibreOffice-minimal-version value="5.0" ns0:name="LibreOffice 5.0" />
     </ns0:dependencies>
     <ns0:identifier value="com.iex.api.localc" />
-    <ns0:version value="0.0.24" />
+    <ns0:version value="0.0.26" />
     <ns0:display-name>
         <ns0:name lang="en">IEX Trading Data Extension</ns0:name>
     </ns0:display-name>

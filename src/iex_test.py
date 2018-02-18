@@ -20,6 +20,7 @@
 from iex_app_logger import AppLogger
 from iex_price import get_price
 from iex_quote import get_quote_item, get_quote_key_count, get_quote_keyx
+from iex_company import get_company_item, get_company_keyx, get_company_key_count
 # import datetime
 # import time
 # import json
@@ -57,3 +58,17 @@ print(key)
 print("Invalid key test")
 v = get_quote_item("mmm", "invalid_key")
 print(v)
+
+# company_key_count = get_company_key_count()
+# print("Company key count:", company_key_count)
+# print("Company Key/Value pair test")
+# for x in range(0, company_key_count):
+#     key = get_company_keyx(x)
+#     v = get_company_item("mmm", key)
+#     print (key, ":", v)
+# print("Key index out of range test")
+# key = get_company_keyx(company_key_count + 1)
+# print(key)
+# print("Invalid key test")
+# v = get_company_item("mmm", "invalid_key")
+# print(v)

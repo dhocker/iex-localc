@@ -129,7 +129,7 @@ class IEXBase:
             return "Index out of range"
         return "Keys not available"
 
-    def get_quote_item(self, symbol, key):
+    def get_result_item(self, category, symbol, key):
         """
         Returns a result item (a key/value) using data provided by an IEX API call.
         :param symbol: Target stock ticker symbol.
@@ -148,4 +148,4 @@ class IEXBase:
                         return "NA"
                 return res["result"][key]
             return res["error_message"]
-        return "Invalid quote key"
+        return "Invalid {0} key".format(category)

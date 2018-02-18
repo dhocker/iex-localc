@@ -50,6 +50,7 @@ try:
     # After logger
     from iex_price import get_price
     from iex_quote import get_quote_key_count, get_quote_keyx, get_quote_item
+    from iex_company import get_company_key_count, get_company_keyx, get_company_item
 except Exception as ex:
     # Emergency debugging to cover for the fact that LibreOffice is terrible at debugging...
     fh = open("/Volumes/Z77ExtremeDataSSD/dhocker/libreoffice/iex/error_report.txt", "a")
@@ -81,6 +82,18 @@ class IexImpl(unohelper.Base, XIex ):
     def IexQuoteItem(self, symbol, key):
         logger.debug("IexQuoteItem called %s %s", symbol, key)
         return get_quote_item(symbol, key)
+
+    def IexCompanyKeyCount(self):
+        logger.debug("IexCompanyKeyCount called")
+        return get_company_key_count()
+
+    def IexCompanyKeyByIndex(self, index):
+        logger.debug("IexCompanyKeyByIndex called %d", index)
+        return get_company_keyx(index)
+
+    def IexCompanyItem(self, symbol, key):
+        logger.debug("IexCompanyItem called %s %s", symbol, key)
+        return get_company_item(symbol, key)
 
 
 # Configuration lock. Used to deal with the fact that sometimes
