@@ -15,6 +15,12 @@ module com {
                   any IexQuoteKeyByIndex( [in] long keyindex );
                   // Returns a key by index
                   any IexQuoteItem( [in] string symbol, [in] string itemkey );
+                  // Returns count of keys in a company
+                  any IexCompanyKeyCount();
+                  // Returns a key by index
+                  any IexCompanyKeyByIndex( [in] long keyindex );
+                  // Returns a key by index
+                  any IexCompanyItem( [in] string symbol, [in] string itemkey );
                 };
             };
         };
