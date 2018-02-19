@@ -140,12 +140,16 @@ class IEXBase:
             res = self._get_result_for_symbol(symbol)
             if res["status_code"] == 200:
                 # Apply time conversion as required
+                v = res["result"][key]
                 if key in self.time_keys:
-                    if res["result"][key]:
+                    if v:
                         # Convert IEX timestamp value to something human readable
-                        return IEXBase._get_formatted_datetime(res["result"][key])
+                        return IEXBase._get_formatted_datetime(v)
                     else:
                         return "NA"
-                return res["result"][key]
+                elif isinstance(v, int) and (v > 2147483647 or v < -2147483648):
+                    # LO calc doesn't seem to handle large integers
+                    return float(v)
+                return v
             return res["error_message"]
         return "Invalid {0} key".format(category)
