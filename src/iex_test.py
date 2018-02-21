@@ -21,6 +21,7 @@ from iex_app_logger import AppLogger
 from iex_price import get_price
 from iex_quote import get_quote_item, get_quote_key_count, get_quote_keyx
 from iex_company import get_company_item, get_company_keyx, get_company_key_count
+from iex_keystats import get_keystats_key_count, get_keystats_keyx, get_keystats_item
 # import datetime
 # import time
 # import json
@@ -45,19 +46,19 @@ logger.info("Testing iex_quote.get_quote()")
 # v = get_quote("mmm", "change")
 # print ("change for MMM:", v)
 
-quote_key_count = get_quote_key_count()
-print("Quote key count:", quote_key_count)
-print("Quote Key/Value pair test")
-for x in range(0, quote_key_count):
-    key = get_quote_keyx(x)
-    v = get_quote_item("mmm", key)
-    print (key, ":", v)
-print("Key index out of range test")
-key = get_quote_keyx(quote_key_count + 1)
-print(key)
-print("Invalid key test")
-v = get_quote_item("mmm", "invalid_key")
-print(v)
+# quote_key_count = get_quote_key_count()
+# print("Quote key count:", quote_key_count)
+# print("Quote Key/Value pair test")
+# for x in range(0, quote_key_count):
+#     key = get_quote_keyx(x)
+#     v = get_quote_item("mmm", key)
+#     print (key, ":", v)
+# print("Key index out of range test")
+# key = get_quote_keyx(quote_key_count + 1)
+# print(key)
+# print("Invalid key test")
+# v = get_quote_item("mmm", "invalid_key")
+# print(v)
 
 # company_key_count = get_company_key_count()
 # print("Company key count:", company_key_count)
@@ -72,3 +73,17 @@ print(v)
 # print("Invalid key test")
 # v = get_company_item("mmm", "invalid_key")
 # print(v)
+
+key_count = get_keystats_key_count()
+print("KeyStats key count:", key_count)
+print("KyeStats Key/Value pair test")
+for x in range(0, key_count):
+    key = get_keystats_keyx(x)
+    v = get_keystats_item("mmm", key)
+    print (key, ":", v)
+print("Key index out of range test")
+key = get_quote_keyx(key_count + 1)
+print(key)
+print("Invalid key test")
+v = get_quote_item("mmm", "invalid_key")
+print(v)

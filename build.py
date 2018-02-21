@@ -104,6 +104,7 @@ shutil.copy("src/iex_base.py", "build/")
 shutil.copy("src/iex_price.py", "build/")
 shutil.copy("src/iex_quote.py", "build/")
 shutil.copy("src/iex_company.py", "build/")
+shutil.copy("src/iex_keystats.py", "build/")
 shutil.copy("src/extn_helper.py", "build/")
 shutil.copy("src/url_helpers.py", "build/")
 shutil.copy("certifi/cacert.pem", "build/")
@@ -141,6 +142,18 @@ xcu.add_function("IexCompanyKeyByIndex", "Get a company key by its index",
                      ('keyindex', 'The key index where index < key count')
                  ])
 xcu.add_function("IexCompanyItem", "Get a company item by its key",
+                 [
+                     ('symbol', 'The stock ticker symbol for the quote'),
+                     ('itemkey', 'The item key')
+                 ])
+xcu.add_function("IexKeyStatsKeyCount", "Get count of keys in a key stats result",
+                 [
+                 ])
+xcu.add_function("IexKeyStatsKeyByIndex", "Get a key stats key by its index",
+                 [
+                     ('keyindex', 'The key index where index < key count')
+                 ])
+xcu.add_function("IexKeyStatsItem", "Get a key stats item by its key",
                  [
                      ('symbol', 'The stock ticker symbol for the quote'),
                      ('itemkey', 'The item key')

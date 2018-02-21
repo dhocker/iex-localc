@@ -94,7 +94,9 @@ class IEXBase:
             res = self._get_result_for_symbol(self.template_symbol)
             if res["status_code"] != 200:
                 return None
+            # Sort keys case insensitive. Avoids randomized list of keys.
             self.result_keys = list(res["result"].keys())
+            self.result_keys.sort(key=lambda k: k.lower())
         return self.result_keys
     
     def _is_valid_result_key(self, key):
@@ -132,6 +134,8 @@ class IEXBase:
     def get_result_item(self, category, symbol, key):
         """
         Returns a result item (a key/value) using data provided by an IEX API call.
+        :param category: URL category. Currently only used for messages. Could be
+        used to refactor IEX API calls.
         :param symbol: Target stock ticker symbol.
         :param key: item key to be returned.
         :return: Key value or error message
