@@ -27,7 +27,6 @@ class IEXBase:
     
     """
     def __init__(self):
-        # From https://iextrading.com/developer/docs/#quote
         # This list is used to validate requested item keys
         self.result_keys = None
         # Cache organization
@@ -54,9 +53,9 @@ class IEXBase:
 
     def _get_cached_result(self, symbol):
         """
-        Returns a cached quote for a given stock ticker symbol.
+        Returns a cached result for a given stock ticker symbol.
         :param symbol: The target stock ticker symbol.
-        :return: Returns None if no cached quote is available.
+        :return: Returns None if no cached result is available.
         """
         if (symbol in self.result_cache) and (self.result_cache[symbol]["expiration"] > datetime.now()):
             return self.result_cache[symbol]["result"]
@@ -64,7 +63,7 @@ class IEXBase:
     
     def _cache_result(self, result):
         """
-        Add a quote result to the cache. An existing quote for a symbol is replaced.
+        Add a result to the cache. An existing result for a symbol is replaced.
         A cached quote has a "time-to-live" (TTL) value after which it is considered
         invalid.
         :param result:
