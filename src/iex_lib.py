@@ -216,16 +216,16 @@ class IEXStocks(IEXBase):
         return res
 
     @staticmethod
-    def get_dividends(ticker, period):
+    def get_dividends(ticker, period_range):
         """
-
-        :param identifier:
-        :param item:
-        :return:
+        Calls the IEX Stocks/Dividends API to retrieve divdend data for a given time period range.
+        :param ticker: Stock symbol.
+        :param period_range: See https://iextrading.com/developer/docs/#dividends
+        :return: Returns a dict where the result key contains an array of dividends.
         """
 
         template_url = "dividends/{0}"
-        url_string = template_url.format(period)
+        url_string = template_url.format(period_range)
         res = IEXStocks.exec_stock_request(ticker, url_string)
         # logger.debug("%s %s %s", res["identifier"], res["item"], res["value"])
         return res
