@@ -49,7 +49,7 @@ class IEXKeyStats(IEXBase):
             logger.debug("KeyStats cache miss for %s", symbol)
             res = IEXStocks.get_stats(symbol)
             if res["status_code"] == 200:
-                self._cache_result(res)
+                self._cache_result(symbol, res)
                 logger.debug("KeyStats cached for %s", symbol)
         return res
 

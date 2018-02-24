@@ -49,7 +49,7 @@ class IEXCompany(IEXBase):
             logger.debug("Company cache miss for %s", symbol)
             res = IEXStocks.get_company(symbol)
             if res["status_code"] == 200:
-                self._cache_result(res)
+                self._cache_result(symbol, res)
                 logger.debug("Company cached for %s", symbol)
         return res
 

@@ -49,7 +49,7 @@ class IEXQuote(IEXBase):
             logger.debug("Quote cache miss for %s", symbol)
             res = IEXStocks.get_quote(symbol)
             if res["status_code"] == 200:
-                self._cache_result(res)
+                self._cache_result(symbol, res)
                 logger.debug("Quote cached for %s", symbol)
         return res
 
