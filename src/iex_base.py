@@ -51,26 +51,27 @@ class IEXBase:
         dt = datetime.fromtimestamp(lt)
         return dt.strftime("%Y-%m-%d %H:%M:%S %Z")
 
-    def _get_cached_result(self, symbol):
+    def _get_cached_result(self, cache_key):
         """
         Returns a cached result for a given stock ticker symbol.
-        :param symbol: The target stock ticker symbol.
+        :param cache_key: The key value for the cache entry.
         :return: Returns None if no cached result is available.
         """
-        if (symbol in self.result_cache) and (self.result_cache[symbol]["expiration"] > datetime.now()):
-            return self.result_cache[symbol]["result"]
+        if (cache_key in self.result_cache) and (self.result_cache[cache_key]["expiration"] > datetime.now()):
+            return self.result_cache[cache_key]["result"]
         return None
     
-    def _cache_result(self, result):
+    def _cache_result(self, cache_key, result):
         """
         Add a result to the cache. An existing result for a symbol is replaced.
         A cached quote has a "time-to-live" (TTL) value after which it is considered
-        invalid.
-        :param result:
+        stale or invalid.
+        :param cache_key: The key value for the cache entry.
+        :param result: The value to be cached.
         :return:
         """
         # Quote expires in 5 minutes. TODO Consider making this a config value.
-        self.result_cache[result["result"]["symbol"]] = {"expiration":datetime.now() + timedelta(minutes=5), "result":result}
+        self.result_cache[cache_key] = {"expiration":datetime.now() + timedelta(minutes=5), "result":result}
 
     # TODO The dervived class must override this method
     def _get_result_for_symbol(self, symbol):
