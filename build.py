@@ -105,6 +105,7 @@ shutil.copy("src/iex_price.py", "build/")
 shutil.copy("src/iex_quote.py", "build/")
 shutil.copy("src/iex_company.py", "build/")
 shutil.copy("src/iex_keystats.py", "build/")
+shutil.copy("src/iex_dividends.py", "build/")
 shutil.copy("src/extn_helper.py", "build/")
 shutil.copy("src/url_helpers.py", "build/")
 shutil.copy("certifi/cacert.pem", "build/")
@@ -155,8 +156,27 @@ xcu.add_function("IexKeyStatsKeyByIndex", "Get a key stats key by its index",
                  ])
 xcu.add_function("IexKeyStatsItem", "Get a key stats item by its key",
                  [
-                     ('symbol', 'The stock ticker symbol for the quote'),
+                     ('symbol', 'The stock ticker symbol for the dividends'),
                      ('itemkey', 'The item key')
+                 ])
+xcu.add_function("IexDividendsKeyCount", "Get count of keys in a dividend period result",
+                 [
+                     ('symbol', 'The stock ticker symbol for the dividends'),
+                     ('periodrange', 'See https://iextrading.com/developer/docs/#dividends')
+                 ])
+xcu.add_function("IexDividendsPeriodKeyCount", "Get count of periods in a period range",
+                 [
+                 ])
+xcu.add_function("IexDividendsKeyByIndex", "Get a dividends key by its index",
+                 [
+                     ('keyindex', 'The key index where index < key count')
+                 ])
+xcu.add_function("IexDividendsItem", "Get a dividends item by its key",
+                 [
+                     ('symbol', 'The stock ticker symbol for the quote'),
+                     ('itemkey', 'The item key'),
+                     ('period', 'The period within the period range, 0 to period count - 1'),
+                     ('periodrange', 'See https://iextrading.com/developer/docs/#dividends')
                  ])
 
 xcu.generate("build/iex.xcu")

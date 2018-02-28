@@ -162,14 +162,63 @@ index: a value in the range 0 to IEXKeyStatsKeyCount() - 1 (i.e. 0 to 49)
 
 #### IEXKeyStatsItem
 Use the IEXKeyStatsItem function to retrieve significant statistics
-for a ticker symbol. See [price](https://iextrading.com/developer/docs/#key-stats)
+for a ticker symbol. See [key stats](https://iextrading.com/developer/docs/#key-stats)
 ```
 =IEXKeyStatsItem(symbol, item)
 ```
 
-symbol: The stock ticker symbol whose quote is to be retrieved.
+symbol: The stock ticker symbol whose key stats are to be retrieved.
 
 item: The name of the statistic item to be retrieved.
+
+### Dividends
+Reference: [Dividends](https://iextrading.com/developer/docs/#dividends).
+
+#### IEXDividendsKeyCount
+Returns the number of item keys in the Dividends category.
+```
+=IEXDividendsKeyCount()
+```
+
+#### IEXDividendsPeriodCount
+Returns the number of periods in the period range.
+```
+=IEXDividendsPeriodCount(symbol, periodrange)
+```
+
+symbol: The stock ticker symbol whose dividends are to be retrieved.
+
+periodrange: The time range of interest. See
+[Dividends](https://iextrading.com/developer/docs/#dividends). The period
+range is a string value. Current period ranges are: 5y, 2y, 1y, ytd,
+6m, 3m, 1m.
+
+#### IEXDividendsKeyByIndex
+Returns the key name for the nth key in a Dividends period.
+```
+=IEXDividendsKeyByIndex(index)
+```
+
+index: a value in the range 0 to IEXDividendsKeyCount() - 1 (i.e. 0 to 8)
+
+#### IEXDividendsItem
+Use the IEXDividendsItem function to retrieve information about dividends
+for a ticker symbol. See [Dividends](https://iextrading.com/developer/docs/#dividends).
+```
+=IEXDividendsItem(symbol, item, period, periodrange)
+```
+
+symbol: The stock ticker symbol whose dividends are to be retrieved.
+
+item: The name of the dividend item to be retrieved.
+
+period: The period within the period range. Periods are numbered 0-n
+where period 0 is the most recent period.
+
+periodrange: The time range of interest. See
+[Dividends](https://iextrading.com/developer/docs/#dividends). The period
+range is a string value. Current period ranges are: 5y, 2y, 1y, ytd,
+6m, 3m, 1m.
 
 ### Price
 Reference: [Price](https://iextrading.com/developer/docs/#price).

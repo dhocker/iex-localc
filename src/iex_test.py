@@ -18,13 +18,15 @@
 #
 
 from iex_app_logger import AppLogger
+from iex_lib import IEXStocks
 from iex_price import get_price
 from iex_quote import get_quote_item, get_quote_key_count, get_quote_keyx
 from iex_company import get_company_item, get_company_keyx, get_company_key_count
 from iex_keystats import get_keystats_key_count, get_keystats_keyx, get_keystats_item
+from iex_dividends import get_dividends_key_count, get_dividends_period_count, get_dividends_keyx, get_dividends_item
 # import datetime
 # import time
-# import json
+import json
 # Logger init
 
 the_app_logger = AppLogger("iex-extension")
@@ -74,16 +76,44 @@ logger = the_app_logger.getAppLogger()
 # v = get_company_item("mmm", "invalid_key")
 # print(v)
 
-key_count = get_keystats_key_count()
-print("KeyStats key count:", key_count)
-print("KyeStats Key/Value pair test")
-for x in range(0, key_count):
-    key = get_keystats_keyx(x)
-    v = get_keystats_item("mmm", key)
-    print (key, ":", v)
+# key_count = get_keystats_key_count()
+# print("KeyStats key count:", key_count)
+# print("KyeStats Key/Value pair test")
+# for x in range(0, key_count):
+#     key = get_keystats_keyx(x)
+#     v = get_keystats_item("mmm", key)
+#     print (key, ":", v)
+# print("Key index out of range test")
+# key = get_keystats_keyx(key_count + 1)
+# print(key)
+# print("Invalid key test")
+# v = get_keystats_item("mmm", "invalid_key")
+# print(v)
+
+# print("Dividends")
+# res = IEXStocks.get_dividends("so", "1y")
+# print(len(res["result"]), "dividend periods")
+# print(len(res["result"][0]), "dividend item keys")
+# print("Dividends result")
+# print(json.dumps(res["result"], indent=4))
+
+key_count = get_dividends_key_count()
+print("Dividends key count:", key_count)
+period_count = get_dividends_period_count("so", "1y")
+print("Dividends period count:", period_count)
+print("Divdends keys")
+for i in range(key_count):
+    print(get_dividends_keyx(i))
+print("Dividends Key/Value pair test")
+for p in range(period_count):
+    print("Dividend period: ", p)
+    for x in range(0, key_count):
+        key = get_dividends_keyx(x)
+        v = get_dividends_item("so", key, p, "1y")
+        print (key, ":", v)
 print("Key index out of range test")
-key = get_quote_keyx(key_count + 1)
+key = get_dividends_keyx(key_count + 1)
 print(key)
 print("Invalid key test")
-v = get_quote_item("mmm", "invalid_key")
+v = get_dividends_item("so", "invalid_key", 0, "1y")
 print(v)

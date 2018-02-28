@@ -52,6 +52,8 @@ try:
     from iex_quote import get_quote_key_count, get_quote_keyx, get_quote_item
     from iex_company import get_company_key_count, get_company_keyx, get_company_item
     from iex_keystats import get_keystats_key_count, get_keystats_keyx, get_keystats_item
+    from iex_dividends import get_dividends_key_count, get_dividends_period_count, get_dividends_keyx, \
+        get_dividends_item
 except Exception as ex:
     # Emergency debugging to cover for the fact that LibreOffice is terrible at debugging...
     fh = open("/Volumes/Z77ExtremeDataSSD/dhocker/libreoffice/iex/error_report.txt", "a")
@@ -107,6 +109,22 @@ class IexImpl(unohelper.Base, XIex ):
     def IexKeyStatsItem(self, symbol, key):
         logger.debug("IexKeyStatsItem called %s %s", symbol, key)
         return get_keystats_item(symbol, key)
+
+    def IexDividendsKeyCount(self):
+        logger.debug("IexDividendsKeyCount called")
+        return get_dividends_key_count()
+
+    def IexDividendsPeriodCount(self, symbol, periodrange):
+        logger.debug("IexDividendsPeriodCount called")
+        return get_dividends_period_count(symbol, periodrange)
+
+    def IexDividendsKeyByIndex(self, index):
+        logger.debug("IexDividendsKeyByIndex called %d", index)
+        return get_dividends_keyx(index)
+
+    def IexDividendsItem(self, symbol, key, period, periodrange):
+        logger.debug("IexDividendsItem called %s %s %d %s", symbol, key, period, periodrange)
+        return get_dividends_item(symbol, key, period, periodrange)
 
 
 # Configuration lock. Used to deal with the fact that sometimes

@@ -27,6 +27,14 @@ module com {
                   any IexKeyStatsKeyByIndex( [in] long keyindex );
                   // Returns a key value
                   any IexKeyStatsItem( [in] string symbol, [in] string itemkey );
+                  // Returns count of keys in a key stats result
+                  any IexDividendsKeyCount();
+                  // Returns count of keys in a key stats result
+                  any IexDividendsPeriodCount([in] string symbol, [in] string periodrange);
+                  // Returns a key by index
+                  any IexDividendsKeyByIndex( [in] long keyindex );
+                  // Returns a key value
+                  any IexDividendsItem( [in] string symbol, [in] string itemkey, [in] long period, [in] string periodrange );
                 };
             };
         };
