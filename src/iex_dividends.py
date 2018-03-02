@@ -163,3 +163,14 @@ def get_dividends_item(symbol, key, period, period_range):
     :return: Key value or error message
     """
     return dividends_inst.get_result_item("dividends", symbol, key, period, period_range)
+
+def get_dividends_ttm(symbol):
+    """
+    Returns the trailing twelve months dividends for a given ticker symbol.
+    :param symbol: Stock ticker symbol
+    :return: Trailing twelve months dividends
+    """
+    ttm = 0.0
+    for i in range(4):
+        ttm += dividends_inst.get_result_item("dividends", symbol, "amount", i, "1y")
+    return ttm

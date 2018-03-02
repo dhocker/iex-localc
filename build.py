@@ -163,7 +163,7 @@ xcu.add_function("IexKeyStatsItem", "Get a key stats item by its key",
 xcu.add_function("IexDividendsKeyCount", "Get count of keys in a dividend period result",
                  [
                      ('symbol', 'The stock ticker symbol for the dividends'),
-                     ('periodrange', 'See #dividends')
+                     ('periodrange', 'See https://iextrading.com/developer/docs/#dividends')
                  ])
 xcu.add_function("IexDividendsPeriodKeyCount", "Get count of periods in a period range",
                  [
@@ -174,10 +174,14 @@ xcu.add_function("IexDividendsKeyByIndex", "Get a dividends key by its index",
                  ])
 xcu.add_function("IexDividendsItem", "Get a dividends item by its key",
                  [
-                     ('symbol', 'The stock ticker symbol for the quote'),
+                     ('symbol', 'The stock ticker symbol for the dividends'),
                      ('itemkey', 'The item key'),
                      ('period', 'The period within the period range, 0 to period count - 1'),
-                     ('periodrange', 'See #dividends')
+                     ('periodrange', 'See https://iextrading.com/developer/docs/#dividends')
+                 ])
+xcu.add_function("IexDividendsTTM", "Get trailing twelve months dividends",
+                 [
+                     ('symbol', 'The stock ticker symbol for the dividends')
                  ])
 xcu.add_function("IexEarningsKeyCount", "Get count of keys in an earnings period result",
                  [

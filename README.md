@@ -222,6 +222,14 @@ periodrange: The time range of interest. See
 range is a string value. Current period ranges are: 5y, 2y, 1y, ytd,
 6m, 3m, 1m.
 
+#### IEXDividendsTTM
+Use the IEXDividendsTTM function to retrieve the trailing twelve months
+dividends for a ticker symbol. This function simplifies the task of
+determining a full twelve months of dividends.
+```
+=IEXDividendsTTM(symbol)
+```
+
 ### Earnings
 Reference: [Earnings](https://iextrading.com/developer/docs/#earnings).
 
@@ -240,7 +248,7 @@ Returns the key name for the nth key in an Earnings period.
 index: a value in the range 0 to IEXEarningsKeyCount() - 1 (i.e. 0 to 8)
 
 #### IEXEarningsItem
-Use the IEXEarningssItem function to retrieve information about earnings
+Use the IEXEarningsItem function to retrieve information about earnings
 for a ticker symbol. See [Earnings](https://iextrading.com/developer/docs/#earnings).
 ```
 =IEXEarningsItem(symbol, item, period)
@@ -252,6 +260,8 @@ item: The name of the earnings item to be retrieved.
 
 period: The period within the period range. Periods are numbered 0-3
 where period 0 is the most recent period.
+
+symbol: The stock ticker symbol whose earnings are to be retrieved.
 
 ### Price
 Reference: [Price](https://iextrading.com/developer/docs/#price).

@@ -23,7 +23,8 @@ from iex_price import get_price
 from iex_quote import get_quote_item, get_quote_key_count, get_quote_keyx
 from iex_company import get_company_item, get_company_keyx, get_company_key_count
 from iex_keystats import get_keystats_key_count, get_keystats_keyx, get_keystats_item
-from iex_dividends import get_dividends_key_count, get_dividends_period_count, get_dividends_keyx, get_dividends_item
+from iex_dividends import get_dividends_key_count, get_dividends_period_count, get_dividends_keyx, \
+    get_dividends_item, get_dividends_ttm
 from iex_earnings import get_earnings_key_count, get_earnings_keyx, get_earnings_item
 # import datetime
 # import time
@@ -118,22 +119,24 @@ logger = the_app_logger.getAppLogger()
 # print("Invalid key test")
 # v = get_dividends_item("so", "invalid_key", 0, "1y")
 # print(v)
+print("Tailing twelve months dividends")
+print("SO:", get_dividends_ttm("so"))
 
-key_count = get_earnings_key_count()
-print("Earnings key count:", key_count)
-print("Earnings keys")
-for i in range(key_count):
-    print("\t", get_earnings_keyx(i))
-print("Earnings Key/Value pair test")
-for p in range(4):
-    print("Earnings period: ", p)
-    for x in range(0, key_count):
-        key = get_earnings_keyx(x)
-        v = get_earnings_item("so", key, p)
-        print ("\t", key, ":", v)
-print("Key index out of range test")
-key = get_earnings_keyx(key_count + 1)
-print(key)
-print("Invalid key test")
-v = get_earnings_item("so", "invalid_key", 0)
-print(v)
+# key_count = get_earnings_key_count()
+# print("Earnings key count:", key_count)
+# print("Earnings keys")
+# for i in range(key_count):
+#     print("\t", get_earnings_keyx(i))
+# print("Earnings Key/Value pair test")
+# for p in range(4):
+#     print("Earnings period: ", p)
+#     for x in range(0, key_count):
+#         key = get_earnings_keyx(x)
+#         v = get_earnings_item("so", key, p)
+#         print ("\t", key, ":", v)
+# print("Key index out of range test")
+# key = get_earnings_keyx(key_count + 1)
+# print(key)
+# print("Invalid key test")
+# v = get_earnings_item("so", "invalid_key", 0)
+# print(v)

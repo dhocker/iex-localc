@@ -53,7 +53,7 @@ try:
     from iex_company import get_company_key_count, get_company_keyx, get_company_item
     from iex_keystats import get_keystats_key_count, get_keystats_keyx, get_keystats_item
     from iex_dividends import get_dividends_key_count, get_dividends_period_count, get_dividends_keyx, \
-        get_dividends_item
+        get_dividends_item, get_dividends_ttm
     from iex_earnings import get_earnings_key_count, get_earnings_keyx, get_earnings_item
 except Exception as ex:
     # Emergency debugging to cover for the fact that LibreOffice is terrible at debugging...
@@ -126,6 +126,10 @@ class IexImpl(unohelper.Base, XIex ):
     def IexDividendsItem(self, symbol, key, period, periodrange):
         logger.debug("IexDividendsItem called %s %s %d %s", symbol, key, period, periodrange)
         return get_dividends_item(symbol, key, period, periodrange)
+
+    def IexDividendsTTM(self, symbol):
+        logger.debug("IexDividendsTTM called %s", symbol)
+        return get_dividends_ttm(symbol)
 
     def IexEarningsKeyCount(self):
         logger.debug("IexEarningsKeyCount called")
