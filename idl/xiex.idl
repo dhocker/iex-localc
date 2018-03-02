@@ -35,6 +35,12 @@ module com {
                   any IexDividendsKeyByIndex( [in] long keyindex );
                   // Returns a key value
                   any IexDividendsItem( [in] string symbol, [in] string itemkey, [in] long period, [in] string periodrange );
+                  // Returns count of keys in an earnings result
+                  any IexEarningsKeyCount();
+                  // Returns a key by index
+                  any IexEarningsKeyByIndex( [in] long keyindex );
+                  // Returns a key value
+                  any IexEarningsItem( [in] string symbol, [in] string itemkey, [in] long period );
                 };
             };
         };

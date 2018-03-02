@@ -42,7 +42,7 @@ class XCUFile:
 
     def _generate_function(self, xcufile, name, desc, parms):
         xcufile.write('  <node oor:name="' + name + '" oor:op="replace">\n')
-        xcufile.write('    <prop oor:name="DisplayName"><value xml:lang="en">' + name + '</value></prop>\n')
+        xcufile.write('    <prop oor:name="DisplayName"><value xml:lang="en">' + escape(name) + '</value></prop>\n')
         xcufile.write('    <prop oor:name="Description"><value xml:lang="en">' + escape(desc) + '</value></prop>\n')
         xcufile.write('    <prop oor:name="Category"><value>Add-In</value></prop>\n')
         xcufile.write(
@@ -53,7 +53,7 @@ class XCUFile:
             # Optional parameters will have a displayname enclosed in square brackets.
             p_name = p.strip("[]")
             xcufile.write('      <node oor:name="' + p_name + '" oor:op="replace">\n')
-            xcufile.write('        <prop oor:name="DisplayName"><value xml:lang="en">' + p_name + '</value></prop>\n')
+            xcufile.write('        <prop oor:name="DisplayName"><value xml:lang="en">' + escape(p_name) + '</value></prop>\n')
             xcufile.write('        <prop oor:name="Description"><value xml:lang="en">' + escape(desc) + '</value></prop>\n')
             xcufile.write('      </node>\n')
 

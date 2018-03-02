@@ -106,6 +106,7 @@ shutil.copy("src/iex_quote.py", "build/")
 shutil.copy("src/iex_company.py", "build/")
 shutil.copy("src/iex_keystats.py", "build/")
 shutil.copy("src/iex_dividends.py", "build/")
+shutil.copy("src/iex_earnings.py", "build/")
 shutil.copy("src/extn_helper.py", "build/")
 shutil.copy("src/url_helpers.py", "build/")
 shutil.copy("certifi/cacert.pem", "build/")
@@ -162,7 +163,7 @@ xcu.add_function("IexKeyStatsItem", "Get a key stats item by its key",
 xcu.add_function("IexDividendsKeyCount", "Get count of keys in a dividend period result",
                  [
                      ('symbol', 'The stock ticker symbol for the dividends'),
-                     ('periodrange', 'See https://iextrading.com/developer/docs/#dividends')
+                     ('periodrange', 'See #dividends')
                  ])
 xcu.add_function("IexDividendsPeriodKeyCount", "Get count of periods in a period range",
                  [
@@ -176,7 +177,21 @@ xcu.add_function("IexDividendsItem", "Get a dividends item by its key",
                      ('symbol', 'The stock ticker symbol for the quote'),
                      ('itemkey', 'The item key'),
                      ('period', 'The period within the period range, 0 to period count - 1'),
-                     ('periodrange', 'See https://iextrading.com/developer/docs/#dividends')
+                     ('periodrange', 'See #dividends')
+                 ])
+xcu.add_function("IexEarningsKeyCount", "Get count of keys in an earnings period result",
+                 [
+                     ('symbol', 'The stock ticker symbol for the earnings')
+                 ])
+xcu.add_function("IexEarningsKeyByIndex", "Get an earnings key by its index",
+                 [
+                     ('keyindex', 'The key index where index < key count')
+                 ])
+xcu.add_function("IexEarningsItem", "Get an earnings item by its key",
+                 [
+                     ('symbol', 'The stock ticker symbol for the quote'),
+                     ('itemkey', 'The item key'),
+                     ('period', 'The period within the period range, 0 to 3')
                  ])
 
 xcu.generate("build/iex.xcu")
