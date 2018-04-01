@@ -57,7 +57,8 @@ try:
     from iex_earnings import get_earnings_key_count, get_earnings_keyx, get_earnings_item
 except Exception as ex:
     # Emergency debugging to cover for the fact that LibreOffice is terrible at debugging...
-    fh = open("/Volumes/Z77ExtremeDataSSD/dhocker/libreoffice/iex/error_report.txt", "a")
+    from iex_lib import QConfiguration
+    fh = open(QConfiguration.home_data_path() + "error_report.txt", "a")
     fh.write(ex)
     fh.write(str(ex))
     fh.close()

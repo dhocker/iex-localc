@@ -17,6 +17,7 @@
 
 import os
 import os.path
+import sys
 import inspect
 import datetime
 import json
@@ -41,7 +42,7 @@ class QConfiguration:
     """
     # Base URL for IEX services
     base_url = "https://api.iextrading.com/1.0"
-    macOS = False
+    macOS = (sys.platform == "darwin")
     file_path = ""
     full_file_path = ""
     cacerts = ""
@@ -58,13 +59,7 @@ class QConfiguration:
         :return: None
         """
         file_name = "iex.conf"
-        if os.name == "posix":
-            # Linux or OS X
-            cls.file_path = "{0}/libreoffice/iex/".format(os.environ["HOME"])
-            cls.macOS = (os.uname()[0] == "Darwin")
-        elif os.name == "nt":
-            # Windows
-            cls.file_path = "{0}\\libreoffice\\iex\\".format(os.environ["APPDATALOCAL"])
+        cls.file_path = QConfiguration.home_data_path()
         cls.full_file_path = cls.file_path + file_name
 
         # Read iex.conf file
@@ -142,6 +137,16 @@ class QConfiguration:
         """
 
         return cls.iex_conf_exists
+
+    @staticmethod
+    def home_data_path():
+        if os.name == "posix":
+            # Linux or OS X
+            return "{0}/libreoffice/iex/".format(os.environ["HOME"])
+        elif os.name == "nt":
+            # Windows
+            return "{0}\\libreoffice\\iex\\".format(os.environ["LOCALAPPDATA"])
+        return ""
 
 # Set up configuration
 QConfiguration.load()
