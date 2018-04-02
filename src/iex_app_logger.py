@@ -49,6 +49,10 @@ class AppLogger:
                 file_path = ""
             logfile = file_path + logname + ".log"
 
+            # Create directory if it doesn't exist
+            if not os.path.exists(file_path):
+                os.makedirs(file_path, exist_ok=True)
+
             fh = logging.handlers.TimedRotatingFileHandler(logfile, when='midnight', backupCount=3)
             fh.setFormatter(formatter)
             self.logger.addHandler(fh)
