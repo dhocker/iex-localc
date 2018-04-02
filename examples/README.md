@@ -12,5 +12,10 @@ Data provided for free by [IEX](https://iextrading.com/developer).
 
 ## Example Spreadsheets
 
-### TBD.ods
-To be determined.
+| LO Calc Spreadsheet     | Reference                  |
+|-------------------------|----------------------------|
+| Company.ods             | IEX [Company](https://iextrading.com/developer/docs/#company) functions      |
+| Dividends.ods           | IEX [Dividends](https://iextrading.com/developer/docs/#dividends) functions    |
+| Earnings.ods            | IEX [Earnings](https://iextrading.com/developer/docs/#earnings) functions      |
+| KeyStats.ods            | IEX [Key Stats](https://iextrading.com/developer/docs/#key-stats) functions      |
+| Prices.ods              | IEX [Price](https://iextrading.com/developer/docs/#price) functions <br/> IEX [Quote](https://iextrading.com/developer/docs/#quote) functions|

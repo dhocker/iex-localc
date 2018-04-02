@@ -41,9 +41,9 @@ Select it.
 1. Click the Close button.
 1. If LibreOffice asks to restart, do so.
 
-It is recommended that you always remove an existing version of the
+**It is recommended that you always remove an existing version of the
 add-in before installing an update. Othwerwise, your results may be
-unpredictable.
+unpredictable.**
 
 ## Example Files
 You can find a number of example files in the
@@ -56,7 +56,7 @@ The addin provides a number of functions for retrieving data from
 the IEX service. The IEX service organizes its API functions in
 a number of categories. Each [API category](https://iextrading.com/developer/docs/#stocks)
 contains a number of data items that are identified by name. The following
-categories are supported.
+categories are currently supported.
 
 * Company
 * Quote
@@ -103,7 +103,7 @@ Returns the number of item keys in the Company category.
 =IEXCompanyKeyCount()
 ```
 #### IEXCompanyKeyByIndex
-Returns the key name for the nth key in a Quote.
+Returns the key name for the nth key in a Company.
 ```
 =IEXCompanyKeyByIndex(index)
 ```
@@ -155,7 +155,7 @@ Returns the number of item keys in the Key Stats category.
 =IEXKeyStatsKeyCount()
 ```
 #### IEXKeyStatsKeyByIndex
-Returns the key name for the nth key in a Quote.
+Returns the key name for the nth key in a Key Stats.
 ```
 =IEXKeyStatsKeyByIndex(index)
 ```
@@ -277,4 +277,5 @@ symbol: The stock ticker symbol whose price is to be retrieved.
 
 ## References
 * [IEX Web Site](https://iextrading.com/)
+* [Developer Docs](https://iextrading.com/developer/docs/)
 * [LibreOffice Web Site](https://www.libreoffice.org/)
