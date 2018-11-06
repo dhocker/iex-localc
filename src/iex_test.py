@@ -18,7 +18,7 @@
 #
 
 from iex_app_logger import AppLogger
-from iex_lib import IEXStocks
+from iex_stocks import IEXStocks
 from iex_price import get_price
 from iex_quote import get_quote_item, get_quote_key_count, get_quote_keyx
 from iex_company import get_company_item, get_company_keyx, get_company_key_count

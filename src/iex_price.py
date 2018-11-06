@@ -16,7 +16,7 @@
 #
 
 from iex_app_logger import AppLogger
-from iex_lib import IEXStocks
+from iex_stocks import IEXStocks
 
 # Logger init
 the_app_logger = AppLogger("iex-extension")

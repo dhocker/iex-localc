@@ -17,6 +17,8 @@
 
 from iex_app_logger import AppLogger
 from datetime import datetime, timedelta
+from url_helpers import exec_request
+from iex_lib import QConfiguration
 
 # Logger init
 the_app_logger = AppLogger("iex-extension")
@@ -154,6 +156,49 @@ class IEXBase:
                 elif isinstance(v, int) and (v > 2147483647 or v < -2147483648):
                     # LO calc doesn't seem to handle large integers
                     return float(v)
+                elif isinstance(v, list):
+                    # Easy out for a list
+                    return ', '.join(v)
                 return v
             return res["error_message"]
         return "Invalid {0} key".format(category)
+
+    @staticmethod
+    def _exec_request(url_string, parms=None):
+        """
+         Submit https request to IEX
+        :param url_string:
+        :param parms:
+        :return: JSON decoded dict containing results of https GET.
+        The status_code key is added to return the HTTPS status code.
+        """
+
+        j = exec_request(QConfiguration.base_url + url_string, parms)
+        return j
+
+    @staticmethod
+    def exec_stock_request(symbol, category, parms=None):
+        url_string = "/stock/{0}/{1}".format(symbol.upper(), category)
+        return IEXBase._exec_request(url_string, parms=parms)
+
+    @staticmethod
+    def status_code_message(status_code):
+        """
+        Return an appropriate message for a non-200 status code
+        :param status_code:
+        :return:
+        """
+        return "Unexpected status code " + str(status_code)
+
+    @staticmethod
+    def get_formatted_datetime(unix_time_ms):
+        """
+        Converts an IEX timestamp value to an ISO formatted date/time string
+        :param unix_time_ms: Unix time in milliseconds.
+        See https://github.com/iexg/IEX-API/issues/93
+        :return: ISO date/time in local time
+        """
+        lt = float(unix_time_ms) / 1000.0
+        # To local time
+        dt = datetime.datetime.fromtimestamp(lt)
+        return dt.strftime("%Y-%m-%d %H:%M:%S %Z")
