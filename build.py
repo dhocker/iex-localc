@@ -108,8 +108,10 @@ shutil.copy("src/iex_company.py", "build/")
 shutil.copy("src/iex_keystats.py", "build/")
 shutil.copy("src/iex_dividends.py", "build/")
 shutil.copy("src/iex_earnings.py", "build/")
+shutil.copy("src/iex_chart.py", "build/")
 shutil.copy("src/extn_helper.py", "build/")
 shutil.copy("src/url_helpers.py", "build/")
+shutil.copy("src/cache_db.py", "build/")
 shutil.copy("certifi/cacert.pem", "build/")
 
 # Generate the XCU file
@@ -197,6 +199,11 @@ xcu.add_function("IexEarningsItem", "Get an earnings item by its key",
                      ('symbol', 'The stock ticker symbol for the quote'),
                      ('itemkey', 'The item key'),
                      ('period', 'The period within the period range, 0 to 3')
+                 ])
+xcu.add_function("IexHistoricalQuote", "Get a closing quote for a date",
+                 [
+                     ('symbol', 'The stock ticker symbol for the quote'),
+                     ('fordate', 'The date YYYY-MM-DD')
                  ])
 
 xcu.generate("build/iex.xcu")

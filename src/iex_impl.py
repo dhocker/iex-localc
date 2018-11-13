@@ -55,6 +55,7 @@ try:
     from iex_dividends import get_dividends_key_count, get_dividends_period_count, get_dividends_keyx, \
         get_dividends_item, get_dividends_ttm
     from iex_earnings import get_earnings_key_count, get_earnings_keyx, get_earnings_item
+    from iex_chart import get_closing_price
 except Exception as ex:
     # Emergency debugging to cover for the fact that LibreOffice is terrible at debugging...
     from iex_lib import QConfiguration
@@ -143,6 +144,10 @@ class IexImpl(unohelper.Base, XIex ):
     def IexEarningsItem(self, symbol, key, period):
         logger.debug("IexEarningsItem called %s %s %d", symbol, key, period)
         return get_earnings_item(symbol, key, period)
+
+    def IexHistoricalQuote(self, symbol, fordate):
+        logger.debug("IexHistoricalQuote called %s %s", symbol, fordate)
+        return get_closing_price(symbol, fordate)
 
 
 # Configuration lock. Used to deal with the fact that sometimes

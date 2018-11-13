@@ -64,6 +64,7 @@ categories are currently supported.
 * Dividends
 * Earnings
 * Price
+* Chart (historical data)
 
 The LOCalc addin generally provides three
 functions for each category (there are some exceptions).
@@ -274,6 +275,28 @@ function model.
 ```
 
 symbol: The stock ticker symbol whose price is to be retrieved.
+
+### Chart
+Reference: [Chart](https://iextrading.com/developer/docs/#chart).
+
+The chart category appears to be designed for constructing historical
+charts. However, it can be useful for a number of historical data queries.
+
+#### IEXHistoricalQuote
+Use the IEXHistoricalQuote function to retrieve the closing price quote for a ticker
+symbol on a given date. Note that this function does not follow the typcial three
+function model.
+```
+=IEXHistoricalQuote(symbol, fordate)
+```
+
+symbol: The stock ticker symbol whose price is to be retrieved.
+
+fordate: The desired date as a string (YYYY-MM-DD) or LOCalc date type
+(=date(YYYY,MM,DD)).
+
+Since historical price quotes do not change, they are persistently cached in an
+SQLite database. This limits the calls to the IEX service.
 
 ## References
 * [IEX Web Site](https://iextrading.com/)

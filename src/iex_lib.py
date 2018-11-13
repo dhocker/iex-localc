@@ -49,6 +49,7 @@ class QConfiguration:
     loglevel = "info"
     cwd = ""
     iex_conf_exists = False
+    iex_cache_db = "~/libreoffice/iex/iex-cache-db.sqlite3"
 
     @classmethod
     def load(cls):
@@ -69,6 +70,19 @@ class QConfiguration:
             if "loglevel" in cfj:
                 cls.loglevel = cfj["loglevel"]
                 the_app_logger.set_log_level(cls.loglevel)
+            if "cachedb" in cfj:
+                cls.iex_cache_db = cfj["cachedb"]
+            else:
+                # Default cache DB definition
+                file_name = "iex-cache-db.sqlite3"
+                if os.name == "posix":
+                    # Linux or OS X
+                    file_path = "{0}/libreoffice/iex/".format(os.environ["HOME"])
+                elif os.name == "nt":
+                    # windows
+                    file_path = "{0}\\libreoffice\\iex\\".format(os.environ["LOCALAPPDATA"])
+                cls.iex_cache_db = file_path + file_name
+            logger.info("Using cache db %s", cls.iex_cache_db)
             cf.close()
             cls.iex_conf_exists = True
         except FileNotFoundError as ex:

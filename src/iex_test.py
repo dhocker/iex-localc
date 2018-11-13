@@ -26,6 +26,7 @@ from iex_keystats import get_keystats_key_count, get_keystats_keyx, get_keystats
 from iex_dividends import get_dividends_key_count, get_dividends_period_count, get_dividends_keyx, \
     get_dividends_item, get_dividends_ttm
 from iex_earnings import get_earnings_key_count, get_earnings_keyx, get_earnings_item
+from iex_chart import get_closing_price
 # import datetime
 # import time
 import json
@@ -119,8 +120,8 @@ logger = the_app_logger.getAppLogger()
 # print("Invalid key test")
 # v = get_dividends_item("so", "invalid_key", 0, "1y")
 # print(v)
-print("Tailing twelve months dividends")
-print("SO:", get_dividends_ttm("so"))
+# print("Tailing twelve months dividends")
+# print("SO:", get_dividends_ttm("so"))
 
 # key_count = get_earnings_key_count()
 # print("Earnings key count:", key_count)
@@ -140,3 +141,6 @@ print("SO:", get_dividends_ttm("so"))
 # print("Invalid key test")
 # v = get_earnings_item("so", "invalid_key", 0)
 # print(v)
+
+v = get_closing_price("vym", "2018-10-31")
+print("Price for VYM on 2018-09-28", v)
