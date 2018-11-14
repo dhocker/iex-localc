@@ -44,7 +44,7 @@ module com {
                   // Returns a key value
                   any IexEarningsItem( [in] string symbol, [in] string itemkey, [in] long period );
                   // Returns a key value
-                  any IexHistoricalQuote( [in] string symbol, [in] string fordate );
+                  any IexHistoricalQuote( [in] string symbol, [in] any fordate );
                 };
             };
         };
