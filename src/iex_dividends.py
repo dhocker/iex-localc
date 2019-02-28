@@ -171,6 +171,9 @@ def get_dividends_ttm(symbol):
     :return: Trailing twelve months dividends
     """
     ttm = 0.0
-    for i in range(4):
+    num_periods = get_dividends_period_count(symbol, "1y")
+    logger.debug("Number of periods in TTM: %d", num_periods)
+    for i in range(num_periods):
         ttm += dividends_inst.get_result_item("dividends", symbol, "amount", i, "1y")
+    # TODO Figure out strategy for persistently caching TTM dividends
     return ttm
