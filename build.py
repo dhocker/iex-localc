@@ -184,7 +184,8 @@ xcu.add_function("IexDividendsItem", "Get a dividends item by its key",
                  ])
 xcu.add_function("IexDividendsTTM", "Get trailing twelve months dividends",
                  [
-                     ('symbol', 'The stock ticker symbol for the dividends')
+                     ('symbol', 'The stock ticker symbol for the dividends'),
+                     ('asofdate', 'As-of-date for TTM dividends')
                  ])
 xcu.add_function("IexEarningsKeyCount", "Get count of keys in an earnings period result",
                  [

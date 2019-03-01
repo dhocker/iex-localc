@@ -15,9 +15,12 @@
 # along with this program (the LICENSE.md file).  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import datetime
 from iex_app_logger import AppLogger
 from iex_stocks import IEXStocks
 from iex_base import IEXBase
+from cache_db import CacheDB
+from extn_helper import normalize_date
 
 # Logger init
 the_app_logger = AppLogger("iex-extension")
@@ -164,16 +167,34 @@ def get_dividends_item(symbol, key, period, period_range):
     """
     return dividends_inst.get_result_item("dividends", symbol, key, period, period_range)
 
-def get_dividends_ttm(symbol):
+def get_dividends_ttm(symbol, asofdate):
     """
     Returns the trailing twelve months dividends for a given ticker symbol.
     :param symbol: Stock ticker symbol
     :return: Trailing twelve months dividends
     """
-    ttm = 0.0
-    num_periods = get_dividends_period_count(symbol, "1y")
-    logger.debug("Number of periods in TTM: %d", num_periods)
-    for i in range(num_periods):
-        ttm += dividends_inst.get_result_item("dividends", symbol, "amount", i, "1y")
-    # TODO Figure out strategy for persistently caching TTM dividends
+    # If no date is given, use the current date
+    if not asofdate:
+        asofdate = datetime.datetime.now().strftime("%Y-%m-%d")
+    else:
+        asofdate = normalize_date(asofdate)
+
+    symbol = symbol.upper()
+
+    # Check cache first
+    r = CacheDB.lookup_ttm_dividend_by_date(symbol, asofdate)
+    if r:
+        logger.debug("TTM Dividends cache hit for %s %s", symbol, asofdate)
+        ttm = r["Amount"]
+    else:
+        # No cache record, do the calculation
+        logger.debug("TTM Dividends cache miss for %s %s", symbol, asofdate)
+        ttm = 0.0
+        num_periods = get_dividends_period_count(symbol, "1y")
+        logger.debug("Number of periods in TTM: %d", num_periods)
+        for i in range(num_periods):
+            ttm += dividends_inst.get_result_item("dividends", symbol, "amount", i, "1y")
+        # Persistently cache this TTM dividend
+        CacheDB.insert_ttm_dividend(symbol, asofdate, ttm)
+        logger.debug("TTM Dividends cached for %s %s", symbol, asofdate)
     return ttm

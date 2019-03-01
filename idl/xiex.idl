@@ -36,7 +36,7 @@ module com {
                   // Returns a key value
                   any IexDividendsItem( [in] string symbol, [in] string itemkey, [in] long period, [in] string periodrange );
                   // Returns a key value
-                  any IexDividendsTTM( [in] string symbol );
+                  any IexDividendsTTM( [in] string symbol, [in] any asofdate );
                   // Returns count of keys in an earnings result
                   any IexEarningsKeyCount();
                   // Returns a key by index

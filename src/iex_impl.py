@@ -129,9 +129,9 @@ class IexImpl(unohelper.Base, XIex ):
         logger.debug("IexDividendsItem called %s %s %d %s", symbol, key, period, periodrange)
         return get_dividends_item(symbol, key, period, periodrange)
 
-    def IexDividendsTTM(self, symbol):
-        logger.debug("IexDividendsTTM called %s", symbol)
-        return get_dividends_ttm(symbol)
+    def IexDividendsTTM(self, symbol, asofdate):
+        logger.debug("IexDividendsTTM called %s %s", symbol, asofdate)
+        return get_dividends_ttm(symbol, asofdate)
 
     def IexEarningsKeyCount(self):
         logger.debug("IexEarningsKeyCount called")

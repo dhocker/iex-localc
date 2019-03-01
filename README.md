@@ -1,5 +1,5 @@
 # LibreOffice Calc Extension for IEX
-Copyright © 2018 by Dave Hocker as Qalydon
+Copyright © 2018, 2019 by Dave Hocker as Qalydon
 
 ## Overview
 This project implements a LibreOffice Calc (LOCalc) addin extension that can
@@ -228,8 +228,19 @@ Use the IEXDividendsTTM function to retrieve the trailing twelve months
 dividends for a ticker symbol. This function simplifies the task of
 determining a full twelve months of dividends.
 ```
-=IEXDividendsTTM(symbol)
+=IEXDividendsTTM(symbol [, asofdate])
 ```
+
+symbol: The stock ticker symbol whose dividends are to be retrieved.
+
+asofdate: The end date of the 12 month period as a string (YYYY-MM-DD) 
+or LOCalc date type (=date(YYYY,MM,DD)). For example, if you specified
+2019-02-28 you would get the total dividends from the period 2018-03-01
+to 2019-02-28. 
+If the date is omitted, the current date is used.
+
+Since historical data of this nature is static, it is persistently 
+cached in an SQLite database. This limits the calls to the IEX service.
 
 ### Earnings
 Reference: [Earnings](https://iextrading.com/developer/docs/#earnings).
