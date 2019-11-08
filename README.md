@@ -21,11 +21,69 @@ GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007. Refer to the
 [LICENSE.md](https://github.com/qalydon/iex-localc/blob/master/README.md)
 file for complete details.
 
-## Download
-Download the latest **iex.oxt** (the add-in file) from
-[here](https://github.com/qalydon/iex-localc/releases).
+## Before Installing
+
+LibreOffice runs on multiple operating systems. For unknown reasons, the content of a LibreOffice install is
+different depending on the operating system. In particular, LibreOffice ships with an embedded version of
+Python and the configuration of the embedded version varies significantly.
+
+### Windows
+
+The IEX extension uses Sqlite3 to cache retrieved data. Unfortunately, the Windows version
+of LibreOffice does not come with Sqlite3. If you want to use the IEX extension on Windows, you will
+need to install a version of Python 3 that matches the Python version that comes
+embedded in LibreOffice. After installing the full version of Python 3, 
+set up PYTHONPATH according to your installation. See the prerequisite installation
+instructions below.
+
+### macOS
+
+Some of the web services used by the IEX extension require secure connections through HTTPS.
+The urllib package in the embedded version of Python does not recognize or use the CA certificates
+installed under macOS. To compensate for this issue, the IEX extension includes the cacert.pem file from the
+[certifi package](https://github.com/certifi/python-certifi).
 
 ## Installation
+
+There are two major steps for installation.
+
+1. Install/setup prerequisites.
+1. Install the extension under LibreOffice
+
+### Install and Setup Prerequisites
+
+#### Windows
+
+If you want to run the SMF Extension under Windows,
+you need to install the full version of 
+[Python 3](https://www.python.org/ftp/python/3.5.4/python-3.5.4-amd64.exe)
+that is used with LibreOffice. For LibreOffice 6.2.8, Python 3.5.4
+is required.
+Be sure to note where you install it. For simplicity, you might consider
+installing to C:\python35. **Be sure to install the 
+x86_64 version (aka the 64-bit version).**
+
+After you install Python 3.5.4, go to the Control Panel and set up the
+PYTHONPATH variable. Open the menu and type **environment variables**.
+This should lead you to the System Properties dialog box. Click on the
+**Environment Variables** button.
+
+Create a new **user** variable named PYTHONPATH. Set the value to the following.
+```
+c:\python35;c:\python35\Lib;c:\python35\Lib\site-packages;c:\python35\Lib\sqlite3;c:\python35\DLLs
+```
+This assumes you installed Python 3.5.4 to C:\python35. If you installed to a
+different directory, adjust PYTHONPATH accordingly.
+
+**After completing the Python installation and setup, it is strongly recommended 
+that you reboot Windows.**
+
+#### macOS
+
+None.
+
+### Install IEX Extension
+
 1. Download the latest **iex.oxt** (the add-in file) from
 [here](https://github.com/qalydon/iex-localc/releases).
 1. Start LibreOffice or LibreOffice Calc.
