@@ -1,6 +1,10 @@
 # LibreOffice Calc Extension for IEX
 Copyright © 2018, 2019 by Dave Hocker as Qalydon
 
+# DEPRECATED
+Unfortunately, IEX has terminated the APIs that were used by this
+LOCalc extension. Therefore, it has been deprecated.
+
 ## Overview
 This project implements a LibreOffice Calc (LOCalc) addin extension that can
 retrieve data from the Investor's Exchange (IEX) service.

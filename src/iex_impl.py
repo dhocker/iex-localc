@@ -60,7 +60,6 @@ except Exception as ex:
     # Emergency debugging to cover for the fact that LibreOffice is terrible at debugging...
     from iex_lib import QConfiguration
     fh = open(QConfiguration.home_data_path() + "error_report.txt", "a")
-    fh.write(ex)
     fh.write(str(ex))
     fh.close()
     exit(666)

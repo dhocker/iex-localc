@@ -17,12 +17,20 @@
 
 from iex_app_logger import AppLogger
 from iex_lib import QConfiguration
-import sqlite3
 import os
 
 # Logger init
 the_app_logger = AppLogger("iex-extension")
 logger = the_app_logger.getAppLogger()
+
+# If Sqlite3 is not available, disable caching
+try:
+    import sqlite3
+    cache_enabled = True
+except Exception as ex:
+    cache_enabled = False
+    logger.error("sqlite3 unavailable; cache disabled")
+    logger.error(str(ex))
 
 
 class CacheDB:
@@ -66,6 +74,8 @@ class CacheDB:
         :param tgtdate:
         :return: Returns the cached DB record. If no record is found, returns None.
         """
+        if not cache_enabled:
+            return None
         conn = cls.__open_yh_cache()
         rset = conn.execute("SELECT * from SymbolDate where Symbol=? and Date=?", [symbol, tgtdate])
         r = rset.fetchone()
@@ -84,6 +94,8 @@ class CacheDB:
         :param close:
         :return:
         """
+        if not cache_enabled:
+            return None
         conn = cls.__open_yh_cache()
         # print ("Cache data:", symbol, tgtdate, close)
         conn.execute("INSERT INTO SymbolDate values (?,?,?,?,?,?,?,?)", [symbol, tgtdate, 0, 0, 0, close, 0, 0])
@@ -98,6 +110,8 @@ class CacheDB:
         :param tgtdate:
         :return: Returns the cached DB record. If no record is found, returns None.
         """
+        if not cache_enabled:
+            return None
         conn = cls.__open_yh_cache()
         rset = conn.execute("SELECT * from TTMDividends where Symbol=? and CalcDate=?", [symbol, tgtdate])
         r = rset.fetchone()
@@ -116,6 +130,8 @@ class CacheDB:
         :param close:
         :return:
         """
+        if not cache_enabled:
+            return None
         conn = cls.__open_yh_cache()
         # print ("Cache data:", symbol, tgtdate, close)
         conn.execute("INSERT INTO TTMdividends values (?,?,?)", [symbol, tgtdate, dividend])
